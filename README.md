@@ -19,7 +19,7 @@ before implementation; never silently rename fields or change response structure
 | Owner | Files | Branch | Responsibility |
 | --- | --- | --- | --- |
 | Satya Sri | `frontend/` | `feat/frontend` | React interface, integration, demo |
-| Teammate | `backend/` | `feat/backend` | API, persistence, calculations, tests |
+| Swetha Sri | `backend/` | `feat/backend` | API, persistence, calculations, tests |
 | Both, coordinated by Satya Sri | `docs/`, root files | Agreed change | Shared specification |
 
 Stack: React + Vite + TypeScript + plain CSS; Python + FastAPI + SQLModel + SQLite.
