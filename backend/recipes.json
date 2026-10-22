@@ -1,0 +1,5 @@
+[
+ {"id":"rice","name":"Rice","ingredients":[{"ingredient_id":"raw-rice","name":"Raw rice","grams_per_diner":100}]},
+ {"id":"dal","name":"Dal","ingredients":[{"ingredient_id":"toor-dal","name":"Toor dal","grams_per_diner":40}]},
+ {"id":"vegetable-curry","name":"Vegetable curry","ingredients":[{"ingredient_id":"mixed-vegetables","name":"Mixed vegetables","grams_per_diner":80}]}
+]
