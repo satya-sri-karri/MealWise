@@ -2,6 +2,7 @@
 import { ApiError } from "./api";
 import type {
   Catalog,
+  Recipe,
   Forecast,
   ForecastRequest,
   Insights,
@@ -10,7 +11,8 @@ import type {
   ResultRequest,
 } from "./types";
 import { chronological, today } from "./utils";
-const key = "mealwise-fixtures-v1";
+import starters from "./data/starter-recipes.json";
+const key = "mealwise-fixtures-v2";
 const catalog: Catalog = {
   settings: {
     hostel_capacity: 250,
@@ -19,35 +21,10 @@ const catalog: Catalog = {
     timezone: "Asia/Kolkata",
     is_demo: true,
   },
-  recipes: [
-    {
-      id: "dal",
-      name: "Dal",
-      ingredients: [
-        { ingredient_id: "toor-dal", name: "Toor dal", grams_per_diner: 40 },
-      ],
-    },
-    {
-      id: "rice",
-      name: "Rice",
-      ingredients: [
-        { ingredient_id: "raw-rice", name: "Raw rice", grams_per_diner: 100 },
-      ],
-    },
-    {
-      id: "vegetable-curry",
-      name: "Vegetable curry",
-      ingredients: [
-        {
-          ingredient_id: "mixed-vegetables",
-          name: "Mixed vegetables",
-          grams_per_diner: 80,
-        },
-      ],
-    },
-  ],
+  recipes: starters as Recipe[],
 };
 interface State {
+  recipes: Recipe[];
   plans: Plan[];
   forecasts: Record<string, Forecast>;
 }
@@ -79,6 +56,10 @@ function forecast(input: ForecastRequest, plans: Plan[]): Forecast {
     .map((r) => ({
       recipe_id: r.id,
       name: r.name,
+      portion_label: r.portion_label,
+      portion_weight_g: r.portion_weight_g,
+      container_label: r.container_label,
+      container_weight_g: r.container_weight_g,
       ingredients: r.ingredients.map((i) => ({
         ...i,
         quantity_kg: round((planned * i.grams_per_diner) / 1000),
@@ -123,16 +104,27 @@ function forecast(input: ForecastRequest, plans: Plan[]): Forecast {
 function metrics(plan: Plan): Metrics {
   const r = plan.result!;
   const sum = (field: "prepared_kg" | "unserved_kg" | "plate_waste_kg") =>
-    round(r.dishes.reduce((s, d) => s + d[field], 0));
-  const waste = round(sum("unserved_kg") + sum("plate_waste_kg"));
+    round(r.dishes.reduce((s, d) => s + (d[field] ?? 0), 0));
+  const plates = round(sum("plate_waste_kg") + (r.mixed_plate_waste_kg ?? 0));
+  const recorded = r.dishes.filter((d) => d.unserved_kg !== null).length;
+  const plateRecorded =
+    r.mixed_plate_waste_kg != null ||
+    r.dishes.every((d) => d.plate_waste_kg !== null);
+  const complete = recorded === r.dishes.length && plateRecorded;
+  const waste = round(sum("unserved_kg") + plates);
   return {
     total_prepared_kg: sum("prepared_kg"),
     total_unserved_kg: sum("unserved_kg"),
-    total_plate_waste_kg: sum("plate_waste_kg"),
+    total_plate_waste_kg: plates,
     total_waste_kg: waste,
-    waste_per_diner_g: r.actual_diners
-      ? round((waste * 1000) / r.actual_diners, 2)
-      : null,
+    recorded_dishes: recorded,
+    total_dishes: r.dishes.length,
+    plate_waste_recorded: plateRecorded,
+    waste_record_complete: complete,
+    waste_per_diner_g:
+      r.actual_diners && complete
+        ? round((waste * 1000) / r.actual_diners, 2)
+        : null,
     forecast_error_diners: round(
       Math.abs(plan.forecast.estimated_diners - r.actual_diners),
       2,
@@ -143,7 +135,11 @@ function metrics(plan: Plan): Metrics {
   };
 }
 function seed(): State {
-  const state: State = { plans: [], forecasts: {} };
+  const state: State = {
+    plans: [],
+    forecasts: {},
+    recipes: structuredClone(catalog.recipes),
+  };
   for (let n = 7; n >= 1; n--) {
     const d = new Date(`${today()}T12:00:00Z`);
     d.setUTCDate(d.getUTCDate() - n);
@@ -151,7 +147,7 @@ function seed(): State {
       {
         date: d.toISOString().slice(0, 10),
         meal_type: "lunch",
-        recipe_ids: catalog.recipes.map((r) => r.id),
+        recipe_ids: ["rice", "dal", "vegetable-curry"],
         fallback_diners: 180,
         adjustment: 0,
         adjustment_reason: "",
@@ -201,6 +197,11 @@ function insights(plans: Plan[]): Insights {
   const completed = plans.filter((p) => p.result && p.metrics);
   const sum = (field: keyof Metrics) =>
     round(completed.reduce((s, p) => s + Number(p.metrics![field]), 0));
+  const full = completed.filter(
+    (p) => p.metrics!.waste_record_complete !== false,
+  );
+  const completeDiners = full.reduce((s, p) => s + p.result!.actual_diners, 0);
+  const completeWaste = full.reduce((s, p) => s + p.metrics!.total_waste_kg, 0);
   const diners = completed.reduce((s, p) => s + p.result!.actual_diners, 0);
   return {
     completed_meals: completed.length,
@@ -213,8 +214,11 @@ function insights(plans: Plan[]): Insights {
     total_unserved_kg: sum("total_unserved_kg"),
     total_plate_waste_kg: sum("total_plate_waste_kg"),
     total_waste_kg: sum("total_waste_kg"),
-    waste_per_diner_g: diners
-      ? round((sum("total_waste_kg") * 1000) / diners, 2)
+    complete_waste_meals: full.length,
+    partial_waste_meals: completed.length - full.length,
+    complete_waste_diners: completeDiners,
+    waste_per_diner_g: completeDiners
+      ? round((completeWaste * 1000) / completeDiners, 2)
       : null,
     mean_forecast_error_diners: completed.length
       ? round(sum("forecast_error_diners") / completed.length, 2)
@@ -231,9 +235,26 @@ export async function fixtureRequest(
   body?: unknown,
 ): Promise<unknown> {
   const state = read();
+  catalog.recipes = state.recipes;
+  if (
+    (path === "/recipes" && method === "POST") ||
+    (path.startsWith("/recipes/") && method === "PUT")
+  ) {
+    const id = method === "POST" ? crypto.randomUUID() : path.split("/")[2];
+    const data = { ...(body as Omit<Recipe, "id">), id };
+    if (
+      state.recipes.some(
+        (r) => r.id !== id && r.name.toLowerCase() === data.name.toLowerCase(),
+      )
+    )
+      throw new ApiError("A dish with this name already exists.", [], 409);
+    state.recipes = [...state.recipes.filter((r) => r.id !== id), data];
+    write(state);
+    return data;
+  }
   if (path === "/health")
     return { status: "ok", api_version: "1", database: "ok" };
-  if (path === "/recipes") return structuredClone(catalog);
+  if (path === "/recipes" && method === "GET") return structuredClone(catalog);
   if (path === "/insights") return insights(state.plans);
   if (path === "/plans" && method === "GET")
     return {

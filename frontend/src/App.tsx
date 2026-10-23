@@ -7,7 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import Planner from "./pages/Planner";
 import Results from "./pages/Results";
 import History from "./pages/History";
-type Page = "dashboard" | "plan" | "results" | "history";
+import Menu from "./pages/Menu";
+type Page = "dashboard" | "plan" | "results" | "history" | "menu";
 const pages: { id: Page; label: string; icon: string; subtitle: string }[] = [
   {
     id: "dashboard",
@@ -26,6 +27,12 @@ const pages: { id: Page; label: string; icon: string; subtitle: string }[] = [
     label: "Record Results",
     icon: "✓",
     subtitle: "Capture what happened after service.",
+  },
+  {
+    id: "menu",
+    label: "Menu Library",
+    icon: "☷",
+    subtitle: "Dishes, serving sizes and recipes for your kitchen.",
   },
   {
     id: "history",
@@ -186,7 +193,12 @@ export default function App() {
                 />
               </div>
               <div hidden={page !== "plan"}>
-                <Planner catalog={catalog} onSaved={refresh} />
+                <Planner
+                  catalog={catalog}
+                  onSaved={refresh}
+                  plans={plans}
+                  openMenu={() => setPage("menu")}
+                />
               </div>
               <div hidden={page !== "results"}>
                 <Results
@@ -194,6 +206,9 @@ export default function App() {
                   onSaved={refresh}
                   active={page === "results"}
                 />
+              </div>
+              <div hidden={page !== "menu"}>
+                <Menu catalog={catalog} onSaved={refresh} />
               </div>
               <div hidden={page !== "history"}>
                 <History plans={plans} insights={insights} />

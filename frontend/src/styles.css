@@ -1075,3 +1075,356 @@ h1:focus {
     scroll-behavior: auto !important;
   }
 }
+/* Kitchen workflow: generous controls, quick entry, reusable dish library. */
+.menu-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: #e9efdf;
+  border: 1px solid #d7e0ca;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 24px;
+}
+.menu-intro p {
+  max-width: 570px;
+  color: #52634d;
+  margin: 7px 0 0;
+  font-size: 13px;
+}
+.menu-intro button {
+  flex-shrink: 0;
+}
+.menu-editor {
+  margin-bottom: 24px;
+}
+.menu-toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+.small-copy {
+  font-size: 12px;
+}
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+.recipe-card {
+  padding: 22px;
+}
+.recipe-card h3 {
+  font-size: 21px;
+  margin: 14px 0 4px;
+}
+.recipe-card p {
+  font-size: 11px;
+}
+.recipe-card .section-title {
+  margin: 0;
+}
+.recipe-facts {
+  font-size: 12px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  margin: 17px 0 8px;
+  display: grid;
+  gap: 5px;
+  color: #5a6e5f;
+}
+.archived {
+  opacity: 0.65;
+}
+.recipe-details {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+.recipe-details summary,
+.measurement-details summary {
+  cursor: pointer;
+  min-height: 35px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.recipe-details p {
+  font-size: 12px;
+  margin-top: 14px;
+}
+.ingredient-editor {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  align-items: end;
+  gap: 12px;
+  margin: 15px 0;
+}
+.menu-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.menu-shortcuts span {
+  font-size: 11px;
+  flex-basis: 100%;
+}
+.menu-shortcuts button {
+  font-size: 11px;
+  padding: 8px 10px;
+  min-height: 38px;
+}
+.planner-search {
+  display: flex;
+  align-items: end;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.planner-search label {
+  flex: 1;
+}
+.planner-search button {
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.selection-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: -10px;
+}
+.selection-bar span {
+  margin-right: auto;
+}
+.selection-bar button {
+  font-size: 11px;
+}
+.selected-menu {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.selected-chip {
+  background: #285a40;
+  color: white;
+  border: 1px solid #285a40;
+  font-size: 12px;
+  padding: 9px 12px;
+}
+.quick-dish {
+  border: 1px solid #dce4d6;
+  border-radius: 11px;
+  padding: 17px 18px;
+  margin: 25px 0;
+  background: #fcfdf9;
+}
+.quick-dish legend {
+  padding: 0 7px;
+  margin: 0;
+  font-size: 16px;
+}
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.quick-actions button {
+  font-size: 12px;
+}
+.quick-quantity {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0;
+}
+.conversion {
+  font-size: 15px;
+  font-weight: 650;
+  padding-top: 20px;
+}
+.conversion small {
+  display: block;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 11px;
+  margin-top: 4px;
+}
+.measurement-details {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.measurement-details .form-grid {
+  margin: 14px 0;
+}
+.bin-entry {
+  background: #edf2e7;
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+.bin-entry h3 {
+  margin-top: 0;
+}
+.bin-entry p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.bin-entry input {
+  max-width: 230px;
+}
+.bin-entry small {
+  display: block;
+  margin-top: 12px;
+}
+.coverage-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 17px;
+}
+.action-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 19px 23px;
+  background: #edf2e7;
+  border: 1px solid #dce5d3;
+  border-radius: 10px;
+  margin-bottom: 22px;
+}
+.action-strip b {
+  display: block;
+  font-size: 14px;
+}
+.action-strip span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.waste-watch {
+  margin: 0 0 24px;
+}
+.leftover-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 15px 0;
+}
+.leftover-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+.leftover-row > strong {
+  margin-left: auto;
+  font-size: 16px;
+}
+.rank {
+  font-size: 12px;
+  color: #74816a;
+}
+.leftover-row b {
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .recipe-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .quick-quantity {
+    grid-template-columns: 1fr 1fr;
+  }
+  .conversion {
+    grid-column: 1/-1;
+    padding: 0;
+  }
+  .planner-search {
+    flex-wrap: wrap;
+  }
+  .planner-search label {
+    min-width: 180px;
+  }
+}
+@media (max-width: 800px) {
+  .sidebar nav button {
+    font-size: 10px;
+  }
+  .sidebar nav button span {
+    font-size: 17px;
+  }
+  .recipe-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .menu-intro {
+    align-items: flex-start;
+  }
+  .menu-intro button {
+    font-size: 12px;
+  }
+}
+@media (max-width: 480px) {
+  .recipe-grid {
+    grid-template-columns: 1fr;
+  }
+  .menu-intro {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .menu-toolbar {
+    grid-template-columns: 1fr;
+  }
+  .ingredient-editor {
+    grid-template-columns: 1fr;
+  }
+  .ingredient-editor button {
+    justify-self: start;
+  }
+  .quick-actions {
+    gap: 5px;
+  }
+  .quick-actions button {
+    padding: 8px;
+    font-size: 10px;
+  }
+  .quick-dish {
+    padding: 15px 12px;
+  }
+  .quick-quantity {
+    gap: 10px;
+  }
+  .selection-bar {
+    gap: 8px;
+  }
+  .selection-bar button {
+    font-size: 10px;
+  }
+  .action-strip {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+  }
+  .sidebar nav button {
+    font-size: 9px;
+  }
+  .sidebar nav {
+    gap: 2px;
+  }
+  .sidebar nav button span {
+    font-size: 17px;
+  }
+  .planner-search {
+    gap: 6px;
+  }
+  .menu-shortcuts button {
+    font-size: 10px;
+  }
+}

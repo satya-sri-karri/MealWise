@@ -19,6 +19,22 @@ export default function Dashboard({
   const latest = recent[0];
   return (
     <>
+      <div className="action-strip">
+        <div>
+          <b>
+            {
+              plans.filter(
+                (p) => p.status === "planned" && p.forecast.date <= today(),
+              ).length
+            }{" "}
+            meals waiting for results
+          </b>
+          <span>Log attendance and leftovers in a few quick entries.</span>
+        </div>
+        <button className="primary" onClick={() => navigate("results")}>
+          Log a meal →
+        </button>
+      </div>
       <section className="hero">
         <div>
           <span className="eyebrow">THOUGHTFUL MEALS, EVERY DAY</span>
@@ -57,7 +73,7 @@ export default function Dashboard({
         <Stat
           label="Waste per diner"
           value={number(insights.waste_per_diner_g, "g")}
-          caption="Total waste divided by total diners"
+          caption="Complete waste records only"
         />
         <Stat
           label="People not served"
@@ -65,6 +81,13 @@ export default function Dashboard({
           caption="Keep availability in view"
         />
       </div>
+      {(insights.partial_waste_meals || 0) > 0 && (
+        <div className="notice">
+          {insights.partial_waste_meals} meals have partial waste records.
+          Recorded waste is a known subtotal; waste per diner uses only the{" "}
+          {insights.complete_waste_meals || 0} complete records.
+        </div>
+      )}
       <div className="split">
         <section className="panel">
           <div className="section-title">
@@ -139,6 +162,29 @@ export default function Dashboard({
           )}
         </section>
       </div>
+      {!!insights.dish_leftovers?.length && (
+        <section className="panel waste-watch">
+          <div className="section-title">
+            <div>
+              <h2>Where to look next</h2>
+              <p>
+                Dishes with the most recorded discarded leftovers. Compare
+                similar menus before changing portions.
+              </p>
+            </div>
+          </div>
+          {insights.dish_leftovers.slice(0, 4).map((d, index) => (
+            <div className="leftover-row" key={d.recipe_id}>
+              <span className="rank">0{index + 1}</span>
+              <div>
+                <b>{d.name}</b>
+                <small>{d.recorded_meals} recorded meals</small>
+              </div>
+              <strong>{number(d.unserved_kg, "kg")}</strong>
+            </div>
+          ))}
+        </section>
+      )}
       <section className="panel">
         <div className="section-title">
           <div>

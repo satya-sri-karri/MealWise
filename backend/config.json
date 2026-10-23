@@ -1,0 +1,7 @@
+{
+  "hostel_capacity": 250,
+  "default_fallback_diners": 180,
+  "default_buffer_percent": 5,
+  "timezone": "Asia/Kolkata",
+  "is_demo": true
+}
