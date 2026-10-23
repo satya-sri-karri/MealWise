@@ -1,0 +1,432 @@
+[
+  {
+    "id": "rice",
+    "name": "Rice",
+    "ingredients": [
+      {
+        "ingredient_id": "raw-rice",
+        "name": "Raw rice",
+        "grams_per_diner": 100
+      }
+    ],
+    "category": "Rice & breads",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "bowl",
+    "portion_weight_g": 200,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true
+  },
+  {
+    "id": "dal",
+    "name": "Dal",
+    "ingredients": [
+      {
+        "ingredient_id": "toor-dal",
+        "name": "Toor dal",
+        "grams_per_diner": 40
+      }
+    ],
+    "category": "Dal & curries",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "bowl",
+    "portion_weight_g": 150,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true
+  },
+  {
+    "id": "vegetable-curry",
+    "name": "Vegetable curry",
+    "ingredients": [
+      {
+        "ingredient_id": "mixed-vegetables",
+        "name": "Mixed vegetables",
+        "grams_per_diner": 80
+      }
+    ],
+    "category": "Dal & curries",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 120,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true
+  },
+  {
+    "id": "idli",
+    "name": "Idli",
+    "category": "Breakfast",
+    "meal_types": [
+      "breakfast"
+    ],
+    "portion_label": "piece",
+    "portion_weight_g": 40,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "raw-rice",
+        "name": "Raw rice",
+        "grams_per_diner": 60
+      },
+      {
+        "ingredient_id": "urad-dal",
+        "name": "Urad dal",
+        "grams_per_diner": 20
+      }
+    ]
+  },
+  {
+    "id": "dosa",
+    "name": "Dosa",
+    "category": "Breakfast",
+    "meal_types": [
+      "breakfast",
+      "dinner"
+    ],
+    "portion_label": "piece",
+    "portion_weight_g": 80,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "raw-rice",
+        "name": "Raw rice",
+        "grams_per_diner": 70
+      },
+      {
+        "ingredient_id": "urad-dal",
+        "name": "Urad dal",
+        "grams_per_diner": 20
+      }
+    ]
+  },
+  {
+    "id": "upma",
+    "name": "Upma",
+    "category": "Breakfast",
+    "meal_types": [
+      "breakfast"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 200,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "semolina",
+        "name": "Semolina",
+        "grams_per_diner": 70
+      }
+    ]
+  },
+  {
+    "id": "poha",
+    "name": "Poha",
+    "category": "Breakfast",
+    "meal_types": [
+      "breakfast"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 180,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "flattened-rice",
+        "name": "Flattened rice",
+        "grams_per_diner": 70
+      }
+    ]
+  },
+  {
+    "id": "pongal",
+    "name": "Pongal",
+    "category": "Breakfast",
+    "meal_types": [
+      "breakfast"
+    ],
+    "portion_label": "bowl",
+    "portion_weight_g": 200,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "raw-rice",
+        "name": "Raw rice",
+        "grams_per_diner": 60
+      },
+      {
+        "ingredient_id": "moong-dal",
+        "name": "Moong dal",
+        "grams_per_diner": 25
+      }
+    ]
+  },
+  {
+    "id": "chapati",
+    "name": "Chapati",
+    "category": "Rice & breads",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "piece",
+    "portion_weight_g": 40,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "wheat-flour",
+        "name": "Wheat flour",
+        "grams_per_diner": 90
+      }
+    ]
+  },
+  {
+    "id": "puri",
+    "name": "Puri",
+    "category": "Breakfast",
+    "meal_types": [
+      "breakfast"
+    ],
+    "portion_label": "piece",
+    "portion_weight_g": 30,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "wheat-flour",
+        "name": "Wheat flour",
+        "grams_per_diner": 80
+      }
+    ]
+  },
+  {
+    "id": "lemon-rice",
+    "name": "Lemon rice",
+    "category": "Rice & breads",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "bowl",
+    "portion_weight_g": 200,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "raw-rice",
+        "name": "Raw rice",
+        "grams_per_diner": 100
+      }
+    ]
+  },
+  {
+    "id": "sambar",
+    "name": "Sambar",
+    "category": "Dal & curries",
+    "meal_types": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "bowl",
+    "portion_weight_g": 150,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "toor-dal",
+        "name": "Toor dal",
+        "grams_per_diner": 25
+      },
+      {
+        "ingredient_id": "mixed-vegetables",
+        "name": "Mixed vegetables",
+        "grams_per_diner": 50
+      }
+    ]
+  },
+  {
+    "id": "rasam",
+    "name": "Rasam",
+    "category": "Sides",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "cup",
+    "portion_weight_g": 120,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "chutney",
+    "name": "Chutney",
+    "category": "Sides",
+    "meal_types": [
+      "breakfast",
+      "dinner"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 40,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "curd",
+    "name": "Curd",
+    "category": "Sides",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "cup",
+    "portion_weight_g": 100,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "curd",
+        "name": "Curd",
+        "grams_per_diner": 100
+      }
+    ]
+  },
+  {
+    "id": "egg-curry",
+    "name": "Egg curry",
+    "category": "Dal & curries",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 150,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "chicken-curry",
+    "name": "Chicken curry",
+    "category": "Dal & curries",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 180,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "paneer-curry",
+    "name": "Paneer curry",
+    "category": "Dal & curries",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 150,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "salad",
+    "name": "Salad",
+    "category": "Sides",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "serving",
+    "portion_weight_g": 80,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": [
+      {
+        "ingredient_id": "salad-vegetables",
+        "name": "Salad vegetables",
+        "grams_per_diner": 80
+      }
+    ]
+  },
+  {
+    "id": "banana",
+    "name": "Banana",
+    "category": "Sides",
+    "meal_types": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "piece",
+    "portion_weight_g": 100,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "tea",
+    "name": "Tea",
+    "category": "Drinks",
+    "meal_types": [
+      "breakfast"
+    ],
+    "portion_label": "cup",
+    "portion_weight_g": 120,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  },
+  {
+    "id": "buttermilk",
+    "name": "Buttermilk",
+    "category": "Drinks",
+    "meal_types": [
+      "lunch",
+      "dinner"
+    ],
+    "portion_label": "glass",
+    "portion_weight_g": 200,
+    "container_label": "container",
+    "container_weight_g": null,
+    "active": true,
+    "ingredients": []
+  }
+]

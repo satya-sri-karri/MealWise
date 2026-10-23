@@ -1,5 +1,9 @@
 # MealWise API contract v1
 
+**Current implementation:** see [Kitchen workflow v2](KITCHEN_WORKFLOW_V2.md) for
+persistent menu editing, nullable measurements, quick units, shared plate waste and
+coverage-aware analytics. Its changes supersede the corresponding v1 restrictions.
+
 Status: implementation specification. Both assistants must implement these names
 and structures exactly. Changes require agreement before either side codes them.
 

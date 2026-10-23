@@ -1,5 +1,6 @@
 import type {
   Catalog,
+  Recipe,
   FieldError,
   Forecast,
   ForecastRequest,
@@ -54,13 +55,19 @@ async function request<T>(
   } catch (error) {
     if (error instanceof ApiError) throw error;
     throw new ApiError(
-      "Cannot reach the kitchen service. Check that the backend is running on port 8000, then retry. Your entries are still here.",
+      "Cannot reach the kitchen service. Check that the backend is running and the frontend API target matches its port, then retry. Your entries are still here.",
     );
   } finally {
     window.clearTimeout(timeout);
   }
 }
 export const api = {
+  saveRecipe: (recipe: Omit<Recipe, "id">, id?: string) =>
+    request<Recipe>(
+      id ? `/recipes/${encodeURIComponent(id)}` : "/recipes",
+      id ? "PUT" : "POST",
+      recipe,
+    ),
   health: () =>
     request<{ status: "ok"; api_version: "1"; database: "ok" }>("/health"),
   recipes: () => request<Catalog>("/recipes"),

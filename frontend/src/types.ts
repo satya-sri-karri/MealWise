@@ -14,6 +14,13 @@ export interface Ingredient {
 export interface Recipe {
   id: string;
   name: string;
+  category?: string;
+  meal_types?: MealType[];
+  portion_label?: string;
+  portion_weight_g?: number | null;
+  container_label?: string;
+  container_weight_g?: number | null;
+  active?: boolean;
   ingredients: {
     ingredient_id: string;
     name: string;
@@ -48,22 +55,29 @@ export interface Forecast extends ForecastRequest {
   dishes: {
     recipe_id: string;
     name: string;
+    portion_label?: string;
+    portion_weight_g?: number | null;
+    container_label?: string;
+    container_weight_g?: number | null;
     ingredients: (Ingredient & { grams_per_diner: number })[];
   }[];
   ingredients: Ingredient[];
 }
 export interface DishResult {
   recipe_id: string;
-  prepared_kg: number;
-  unserved_kg: number;
-  plate_waste_kg: number;
+  prepared_kg: number | null;
+  unserved_kg: number | null;
+  plate_waste_kg: number | null;
   measurement_method: "weighed" | "estimated";
+  entry_unit?: "kg" | "portion" | "container";
+  entry_amount?: number | null;
 }
 export interface ResultRequest {
   actual_diners: number;
   shortage_count: number;
   dishes: DishResult[];
   notes: string;
+  mixed_plate_waste_kg?: number | null;
 }
 export interface MealResult extends ResultRequest {
   plan_id: string;
@@ -77,6 +91,10 @@ export interface Metrics {
   waste_per_diner_g: number | null;
   forecast_error_diners: number;
   has_estimated_measurements: boolean;
+  recorded_dishes?: number;
+  total_dishes?: number;
+  plate_waste_recorded?: boolean;
+  waste_record_complete?: boolean;
 }
 export interface Plan {
   id: string;
@@ -98,6 +116,15 @@ export interface Insights {
   mean_forecast_error_diners: number | null;
   meals_with_estimated_measurements: number;
   demo_meals: number;
+  complete_waste_meals?: number;
+  partial_waste_meals?: number;
+  complete_waste_diners?: number;
+  dish_leftovers?: {
+    recipe_id: string;
+    name: string;
+    recorded_meals: number;
+    unserved_kg: number;
+  }[];
 }
 export interface FieldError {
   path: string;

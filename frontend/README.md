@@ -1,8 +1,7 @@
 # MealWise frontend
 
 React + TypeScript + Vite, with plain CSS. Implements Dashboard, Plan a Meal,
-Record Results, and History & Insights against `../docs/API_CONTRACT.md` v1.
-All implementation changes are confined to `frontend/`.
+Record Results, Menu Library, and History & Insights against `../docs/API_CONTRACT.md` plus the v2 kitchen workflow addendum.
 
 ## Install and run
 
@@ -15,8 +14,7 @@ npm run dev
 ```
 
 Open the URL printed by Vite (normally http://127.0.0.1:5173).
-Start the backend separately following `backend/README.md` once the backend is
-available. Relative `/api` requests proxy to http://127.0.0.1:8000.
+Start the backend separately following `backend/README.md`. Relative `/api` requests proxy to http://127.0.0.1:8000.
 There is no silent fallback: a disconnected backend displays a retryable error.
 
 ## Preview while the backend is being built
@@ -37,7 +35,7 @@ for exact decimal arithmetic and server-side validation.
 To reset fixtures, run this in the browser console and reload:
 
 ```js
-localStorage.removeItem("mealwise-fixtures-v1");
+localStorage.removeItem("mealwise-fixtures-v2");
 ```
 
 To integrate with Swetha's backend, set `VITE_USE_MOCKS=false` (or remove `.env.local`)
@@ -66,7 +64,7 @@ Tests start isolated fixture and real-mode development servers on ports 5173/517
 Keep those ports free; use `CI=1` to disallow reusing existing servers. The suite runs
 on desktop and Pixel 7 viewport configurations. It covers the complete fixture
 workflow, corrections and reload persistence, stale-preview invalidation, duplicate
-saves, waste validation, zero-demand/future-date handling, viewport overflow,
+saves, waste validation, custom dish editing/archiving, partial records, viewport overflow,
 keyboard navigation, and real-mode network failures without fallback.
 
 For environments providing their own Chromium, set
@@ -90,7 +88,7 @@ For environments providing their own Chromium, set
 
 - `src/types.ts`: shared API shapes.
 - `src/api.ts`: typed relative-URL client, timeouts and error envelope handling.
-- `src/pages/`: the four screens.
+- `src/pages/`: the five screens.
 - `src/components.tsx`: reusable forecast, error, empty and metric views.
 - `src/fixtures.ts`: explicitly enabled, dynamically imported local demo adapter.
 - `src/styles.css`: responsive design without a component/UI dependency.
@@ -103,3 +101,15 @@ forecast, save-plan, result PUT, plans and insights endpoints after merging the
 backend. Then check a known 180 → 150 → 158 forecast, corrections, server validation,
 and persistence after restarting the backend. Browser fixture checks do not prove
 backend/database persistence or end-to-end integration with FastAPI.
+
+## Kitchen workflow upgrade
+
+Menu Library adds 22 starters, custom dishes, editable ingredients, serving/container
+sizes and archive controls. Quick results accept optional weights, explicit missing
+measurements, portion/container estimates and one shared plate-waste bin.
+Waste-per-diner figures use complete waste records only. See
+[the API addendum](../docs/KITCHEN_WORKFLOW_V2.md) for exact behavior.
+
+For a backend on port 8001, set `$env:MEALWISE_API_TARGET="http://127.0.0.1:8001"`
+in the frontend PowerShell before running npm run dev. This avoids editing the proxy
+file for each machine. Fixture mode remains explicitly opt-in.

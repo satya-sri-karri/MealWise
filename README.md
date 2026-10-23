@@ -2,7 +2,7 @@
 
 Hostel meal planning and cooked-food waste tracking.
 
-**Status:** Shared specification ready; applications are not implemented yet.
+**Status:** Frontend and backend implemented with the kitchen workflow upgrade.
 This one-day prototype uses fictional demo data and a transparent historical baseline.
 It does not yet demonstrate verified waste reduction.
 
@@ -10,6 +10,7 @@ It does not yet demonstrate verified waste reduction.
 
 1. [Project brief and one-day checklist](docs/PROJECT_BRIEF.md)
 2. [Shared API contract v1](docs/API_CONTRACT.md)
+3. [Kitchen workflow v2 extensions](docs/KITCHEN_WORKFLOW_V2.md)
 
 Both coding assistants must use the same committed specification. Propose API changes
 before implementation; never silently rename fields or change response structures.
@@ -24,7 +25,7 @@ before implementation; never silently rename fields or change response structure
 
 Stack: React + Vite + TypeScript + plain CSS; Python + FastAPI + SQLModel + SQLite.
 Expected folders: `frontend/`, `backend/`, `docs/`.
-Application owners create their own folders and setup READMEs.
+Each application folder includes setup and verification instructions.
 
 ## Start on both computers
 
@@ -81,20 +82,16 @@ GitHub shares source code; it does not run the API or synchronize SQLite databas
 Each computer installs dependencies and runs the idempotent seed script separately.
 Never commit secrets, local databases, dependencies or build output.
 
-## Next AI tasks
-
-**Frontend assistant:** Read both documents. Work on `feat/frontend`, edit only
-`frontend/`. Build the four screens using the contract exactly, with a typed API
-client, loading/error/empty states, accessible forms and responsive layout.
-Preserve form values on failure. Include setup instructions and run the production build.
-
-**Backend assistant:** Read both documents. Work on `feat/backend`, edit only
-`backend/`. Implement the seven endpoints exactly, explicit schemas, an anchored
-SQLite path, immutable forecast snapshots, atomic result upserts, idempotent demo
-seeding and meaningful calculation/persistence tests. Include setup instructions.
-
 ## Delivery
 
 Working local workflow: plan → adjust → save → record results → review insights.
 Use fictional data only for the unauthenticated demo. Hosting and production access
 controls are separate future work.
+
+## Kitchen workflow upgrade
+
+Read [Kitchen workflow v2](docs/KITCHEN_WORKFLOW_V2.md) for custom menus,
+22 starter dishes, portion/container estimates, optional weights and honest waste
+coverage. Use frontend/README.md and backend/README.md for startup and tests.
+Run both from this same branch; the older frontend cannot edit the new nullable
+result fields correctly. Preserve any uncommitted local changes before switching branches.

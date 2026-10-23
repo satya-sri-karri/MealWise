@@ -24,7 +24,7 @@ export default function History({
         <Stat
           label="Waste per diner"
           value={number(insights.waste_per_diner_g, "g")}
-          caption="Calculated from totals across meals"
+          caption="Complete waste records only"
         />
         <Stat
           label="Estimated measurements"
@@ -36,6 +36,12 @@ export default function History({
         Baseline error compares the original estimate with diners served. Read
         it alongside shortages; it does not measure all unmet demand.
       </p>
+      {(insights.partial_waste_meals || 0) > 0 && (
+        <div className="notice">
+          {insights.partial_waste_meals} meals have unmeasured waste. They are
+          excluded from waste-per-diner averages, not treated as zero.
+        </div>
+      )}
       <section className="panel">
         <div className="section-title">
           <h2>Meal history</h2>
@@ -81,6 +87,15 @@ export default function History({
                 </div>
                 <div>
                   <h3>Service outcome</h3>
+                  {p.metrics?.waste_record_complete === false && (
+                    <div className="notice">
+                      Partial record · {p.metrics.recorded_dishes}/
+                      {p.metrics.total_dishes} dishes logged.{" "}
+                      {p.metrics.plate_waste_recorded
+                        ? "Plate waste recorded."
+                        : "Plate waste not recorded."}
+                    </div>
+                  )}
                   {p.result && p.metrics ? (
                     <>
                       <dl className="detail-list">
@@ -125,6 +140,13 @@ export default function History({
                         </div>
                       ))}
                       <p>{p.result.notes || "No service notes."}</p>
+                      {p.result.mixed_plate_waste_kg != null && (
+                        <p>
+                          Shared plate-waste bin:{" "}
+                          {number(p.result.mixed_plate_waste_kg, "kg")}{" "}
+                          (estimated)
+                        </p>
+                      )}
                     </>
                   ) : (
                     <p className="muted">Results have not been recorded yet.</p>

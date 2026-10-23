@@ -82,6 +82,16 @@ export function ForecastView({ forecast }: { forecast: Forecast }) {
       </div>
       <p className="explanation">{forecast.explanation}</p>
       <h3>Raw ingredients</h3>
+      {forecast.dishes.some((d) => !d.ingredients.length) && (
+        <div className="notice">
+          Ingredient quantities are not configured for{" "}
+          {forecast.dishes
+            .filter((d) => !d.ingredients.length)
+            .map((d) => d.name)
+            .join(", ")}
+          . Add recipes in Menu Library for future plans.
+        </div>
+      )}
       <ul className="ingredients">
         {forecast.ingredients.map((i) => (
           <li key={i.ingredient_id}>
